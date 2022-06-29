@@ -31,7 +31,6 @@ public class GebruikerSteps {
         Assertions.assertEquals(200, gebruikersResponse.getStatusCode());
         List<GebruikerTestDto> gebruikers = gebruikersResponse.getBody().jsonPath().getList("", GebruikerTestDto.class);
         Assertions.assertEquals(aantal, gebruikers.size());
-        state.
     }
 
     @En("is de voornaam van deze gebruiker {string}")
