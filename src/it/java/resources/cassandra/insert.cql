@@ -9,7 +9,7 @@ use test;
 CREATE table IF NOT EXISTS gebruiker
 (
     id
-    int
+    UUID
     primary key,
     voornaam   varchar,
     achternaam varchar,
