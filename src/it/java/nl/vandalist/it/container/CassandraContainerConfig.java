@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 
 public class CassandraContainerConfig implements Container {
     private static final CassandraContainer<?> cassandra =
-            (CassandraContainer<?>) new CassandraContainer(DockerImageName.parse("cassandra")).withInitScript("cassandra/init-schema-afname.cql").withEnv("MAX_HEAP_SIZE", "256m");
+            (CassandraContainer<?>) new CassandraContainer(DockerImageName.parse("cassandra")).withInitScript("cassandra/insert.cql").withEnv("MAX_HEAP_SIZE", "256m");
 
     private static final String CASSANDRA_SCRIPT_LOCATION = "cassandra/scripts/";
 
