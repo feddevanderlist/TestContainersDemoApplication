@@ -31,11 +31,11 @@ public class GebruikerSteps {
         Assertions.assertEquals(200, gebruikersResponse.getStatusCode());
         List<GebruikerTestDto> gebruikers = gebruikersResponse.getBody().jsonPath().getList("", GebruikerTestDto.class);
         Assertions.assertEquals(aantal, gebruikers.size());
-
+        state.
     }
 
     @En("is de voornaam van deze gebruiker {string}")
-    public void isDeVoornaamVanDezeGebruiker() {
-
+    public void isDeVoornaamVanDezeGebruiker(String voornaam) {
+        Assertions.assertEquals(voornaam, state.getResponse().getBody().jsonPath().getList("", GebruikerTestDto.class).get(0).getVoornaam());
     }
 }
