@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 
 import javax.persistence.*;
 
@@ -16,6 +17,7 @@ import javax.persistence.*;
 public class GebruikerDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @PrimaryKey
     private Long id;
 
     private String voornaam;

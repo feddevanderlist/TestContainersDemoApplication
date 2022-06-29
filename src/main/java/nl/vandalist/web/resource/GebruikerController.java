@@ -4,6 +4,7 @@ import nl.vandalist.model.GebruikerDto;
 import nl.vandalist.service.GebruikersService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,9 +22,8 @@ public class GebruikerController {
         this.gebruikersService = gebruikersService;
     }
 
-    @RequestMapping(
+    @GetMapping(
             value = "",
-            method = RequestMethod.GET,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
