@@ -5,21 +5,18 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
-import javax.persistence.*;
 
 @Getter
 @Builder
-@Entity
 @Table
 @NoArgsConstructor
 @AllArgsConstructor
 public class GebruikerDto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     @PrimaryKey
     private Long id;
-
     private String voornaam;
     private String achternaam;
     private Integer leeftijd;
