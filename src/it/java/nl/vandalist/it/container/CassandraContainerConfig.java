@@ -27,7 +27,7 @@ public class CassandraContainerConfig implements Container {
         cassandra.start();
 
         // Dit is nodig voor het connecten naar de cassandra container (repositories)
-        System.setProperty("spring.data.cassandra.keyspace-name", "afname");
+        System.setProperty("spring.data.cassandra.keyspace-name", "test");
         System.setProperty("spring.data.cassandra.contact-points", cassandra.getHost());
         System.setProperty("spring.data.cassandra.port", String.valueOf(cassandra.getMappedPort(9042)));
 

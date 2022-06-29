@@ -26,7 +26,7 @@ import javax.annotation.PostConstruct;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(initializers = ContainerApplicationRunner.class, classes = TestConfig.class)
 //@DirtiesContext // Deze annotatie zorgt ervoor dat de database wordt geschoond tussen ieder scenario
-@EnableCassandraRepositories(basePackages = "nl.ocwduo.facet.service.afnamemonitor.it.repositories")
+@EnableCassandraRepositories(basePackages = "nl.vandalist.it.repositories") //
 public class CucumberSpringConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(CucumberSpringConfig.class);
 
