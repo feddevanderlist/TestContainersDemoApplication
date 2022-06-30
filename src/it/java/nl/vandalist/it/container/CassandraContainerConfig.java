@@ -5,6 +5,7 @@ import org.testcontainers.containers.delegate.CassandraDatabaseDelegate;
 import org.testcontainers.ext.ScriptUtils;
 import org.testcontainers.utility.DockerImageName;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -46,11 +47,9 @@ public class CassandraContainerConfig implements Container {
     }
 
     private Set<String> listFilesUsingFileWalk(final ClassLoader classLoader) {
-        String scriptLocation = Objects.requireNonNull(classLoader.getResource(CASSANDRA_SCRIPT_LOCATION)).getPath();
-        if (scriptLocation.startsWith("/") && scriptLocation.contains(":")) { // if system is windows fix preset "/"
-            scriptLocation = scriptLocation.replaceFirst("/", "");
-        }
-        try (Stream<Path> stream = Files.walk(Paths.get(scriptLocation), 1)) {
+        final String scriptLocation = Objects.requireNonNull(classLoader.getResource(CASSANDRA_SCRIPT_LOCATION)).getPath();
+        final String scriptLocation2 = new File(scriptLocation).getAbsolutePath();
+        try (Stream<Path> stream = Files.walk(Paths.get(scriptLocation2), 1)) {
             return stream
                     .filter(file -> !Files.isDirectory(file))
                     .map(Path::getFileName)
