@@ -46,7 +46,10 @@ public class CassandraContainerConfig implements Container {
     }
 
     private Set<String> listFilesUsingFileWalk(final ClassLoader classLoader) {
-        final String scriptLocation = Objects.requireNonNull(classLoader.getResource(CASSANDRA_SCRIPT_LOCATION)).getPath();
+        String scriptLocation = Objects.requireNonNull(classLoader.getResource(CASSANDRA_SCRIPT_LOCATION)).getPath();
+        if (scriptLocation.startsWith("/")) {
+            scriptLocation = scriptLocation.replaceFirst("/", "");
+        }
         try (Stream<Path> stream = Files.walk(Paths.get(scriptLocation), 1)) {
             return stream
                     .filter(file -> !Files.isDirectory(file))

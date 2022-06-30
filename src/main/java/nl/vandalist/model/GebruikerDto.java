@@ -10,7 +10,7 @@ import org.springframework.data.cassandra.core.mapping.Table;
 
 @Getter
 @Builder
-@Table
+@Table("gebruiker")
 @NoArgsConstructor
 @AllArgsConstructor
 public class GebruikerDto {
