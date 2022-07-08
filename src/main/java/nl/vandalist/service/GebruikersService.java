@@ -33,6 +33,7 @@ public class GebruikersService {
         if (gebruiker == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Gebruiker bestaat niet");
         }
+
         updatedGebruikerDto.setId(gebruiker.getId());
         return gebruikerRepository.save(updatedGebruikerDto);
     }

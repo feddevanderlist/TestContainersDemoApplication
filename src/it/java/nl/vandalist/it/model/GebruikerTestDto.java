@@ -1,15 +1,18 @@
 package nl.vandalist.it.model;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
+@Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class GebruikerTestDto {
     private Long id;
     private String voornaam;
     private String achternaam;
     private Integer leeftijd;
     private String titel;
-    private Boolean isAdmin;
+    private boolean isAdmin;
+
 }
