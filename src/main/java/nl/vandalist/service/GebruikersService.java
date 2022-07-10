@@ -24,7 +24,13 @@ public class GebruikersService {
     }
 
     public GebruikerDto createGebruiker(GebruikerDto gebruikerDto) {
-        gebruikerDto.setId(null);
+        for (long i = 1L; i < Integer.MAX_VALUE; i++) {
+            if (gebruikerRepository.findById(i).isEmpty()) {
+                gebruikerDto.setId(i);
+                break;
+            }
+        }
+
         return gebruikerRepository.save(gebruikerDto);
     }
 

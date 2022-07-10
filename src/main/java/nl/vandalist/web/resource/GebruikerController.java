@@ -61,11 +61,11 @@ public class GebruikerController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<GebruikerDto> saveGebruiker(@PathVariable("gebruikerId") final Long gebruikerId, @RequestBody final GebruikerDto gebruikerDto) {
+    public ResponseEntity<GebruikerDto> updateGebruiker(@PathVariable("gebruikerId") final Long gebruikerId, @RequestBody final GebruikerDto gebruikerDto) {
         if (gebruikerId == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Er is geen gebruiker id mee gegeven.");
         }
         final GebruikerDto nieuweGebruiker = gebruikersService.updateGebruiker(gebruikerId, gebruikerDto);
-        return ResponseEntity.status(204).body(nieuweGebruiker);
+        return ResponseEntity.ok(nieuweGebruiker);
     }
 }

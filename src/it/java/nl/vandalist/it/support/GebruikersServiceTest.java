@@ -3,6 +3,7 @@ package nl.vandalist.it.support;
 import io.restassured.RestAssured;
 
 import io.restassured.response.Response;
+import nl.vandalist.it.model.GebruikerTestDto;
 import nl.vandalist.model.GebruikerDto;
 import org.springframework.stereotype.Service;
 
@@ -23,15 +24,15 @@ public class GebruikersServiceTest {
                 .andReturn();
     }
 
-    public Response createGebruiker(final int id, final GebruikerDto gebruiker) {
+    public Response createGebruiker(final GebruikerTestDto gebruiker) {
         return RestAssured.given()
                 .contentType("application/json")
                 .body(gebruiker)
-                .post("gebruikers/" + id)
+                .post("gebruikers/")
                 .andReturn();
     }
 
-    public Response updateGebruiker(final int id, final GebruikerDto gebruiker) {
+    public Response updateGebruiker(final long id, final GebruikerTestDto gebruiker) {
         return RestAssured.given()
                 .contentType("application/json")
                 .body(gebruiker)

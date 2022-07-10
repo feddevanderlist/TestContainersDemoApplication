@@ -64,4 +64,18 @@ public class GebruikerSteps {
                 () -> Assertions.assertEquals(expectedGebruiker.isAdmin(), gebruiker.isAdmin())
         );
     }
+
+    @Als("de gebruiker een nieuwe gebruiker aanmaakt met de volgende gegevens")
+    public void deGebruikerEenNieuweGebruikerAanmaaktMetDeVolgendeGegevens(final List<Map<String, String>> gebruikerGegevens) {
+        final GebruikerTestDto nieuweGebruiker = gebruikerMapper.converteerCucumberMapToGebruikerTestDto(gebruikerGegevens.get(0));
+        final Response nieuweGebruikerResponse = gebruikersService.createGebruiker(nieuweGebruiker);
+        state.setResponse(nieuweGebruikerResponse);
+    }
+
+    @Als("de gebruiker een gebruiker update")
+    public void deGebruikerEenGebruikerUpdate(final List<Map<String, String>> gebruikerGegevens) {
+        final GebruikerTestDto nieuweGebruiker = gebruikerMapper.converteerCucumberMapToGebruikerTestDto(gebruikerGegevens.get(0));
+        final Response nieuweGebruikerResponse = gebruikersService.updateGebruiker(nieuweGebruiker.getId(), nieuweGebruiker);
+        state.setResponse(nieuweGebruikerResponse);
+    }
 }

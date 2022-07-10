@@ -11,3 +11,19 @@ Functionaliteit: Werken met gebruiker
     Dan heeft hij een gebruiker met de volgende gegevens
       | id | voornaam | achternaam   | leeftijd | titel  | is_admin |
       | 1  | Fedde    | van der List | 12       | Tester | true     |
+
+  Scenario: create een gebruiker
+    Als de gebruiker een nieuwe gebruiker aanmaakt met de volgende gegevens
+      | id | voornaam | achternaam | leeftijd | titel  | is_admin |
+      | 2  | Test     | Test       | 25       | Tester | false    |
+    Dan heeft hij een gebruiker met de volgende gegevens
+      | id | voornaam | achternaam | leeftijd | titel  | is_admin |
+      | 2  | Test     | Test       | 25       | Tester | false    |
+
+  Scenario: update een gebruiker
+    Als de gebruiker een gebruiker update
+      | id | voornaam | achternaam | leeftijd | titel  | is_admin |
+      | 2  | John     | Wick       | 26       | Tester | true    |
+    Dan heeft hij een gebruiker met de volgende gegevens
+      | id | voornaam | achternaam | leeftijd | titel  | is_admin |
+      | 2  | John     | Wick       | 26       | Tester | true    |
