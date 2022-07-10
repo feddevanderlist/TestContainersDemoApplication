@@ -1,10 +1,8 @@
 package nl.vandalist.it.support;
 
 import io.restassured.RestAssured;
-
 import io.restassured.response.Response;
 import nl.vandalist.it.model.GebruikerTestDto;
-import nl.vandalist.model.GebruikerDto;
 import org.springframework.stereotype.Service;
 
 @Service

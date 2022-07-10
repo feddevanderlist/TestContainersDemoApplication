@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/gebruikers")
 public class GebruikerController {
 
-    private GebruikersService gebruikersService;
+    private final GebruikersService gebruikersService;
 
     public GebruikerController(GebruikersService gebruikersService) {
         this.gebruikersService = gebruikersService;

@@ -30,7 +30,6 @@ public class GebruikersService {
                 break;
             }
         }
-
         return gebruikerRepository.save(gebruikerDto);
     }
 
