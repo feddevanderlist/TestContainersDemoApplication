@@ -40,10 +40,8 @@ public class CassandraContainerConfig implements Container {
         final ClassLoader classLoader = CassandraContainerConfig.class.getClassLoader();
         final Set<String> files = listFilesUsingFileWalk(classLoader);
 
-        for (String fileName : files) {
-            ScriptUtils.runInitScript(
-                    new CassandraDatabaseDelegate(cassandra), CASSANDRA_SCRIPT_LOCATION + fileName);
-        }
+        files.parallelStream().forEach(fileName ->
+                ScriptUtils.runInitScript(new CassandraDatabaseDelegate(cassandra), CASSANDRA_SCRIPT_LOCATION + fileName));
     }
 
     private Set<String> listFilesUsingFileWalk(final ClassLoader classLoader) {

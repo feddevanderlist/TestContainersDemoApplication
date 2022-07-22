@@ -19,11 +19,11 @@ public class GebruikersService {
         return gebruikerRepository.findAll();
     }
 
-    public GebruikerDto getGebruikerById(Long id) {
+    public GebruikerDto getGebruikerById(final Long id) {
         return gebruikerRepository.findById(id).orElse(null);
     }
 
-    public GebruikerDto createGebruiker(GebruikerDto gebruikerDto) {
+    public GebruikerDto createGebruiker(final GebruikerDto gebruikerDto) {
         for (long i = 1L; i < Integer.MAX_VALUE; i++) {
             if (gebruikerRepository.findById(i).isEmpty()) {
                 gebruikerDto.setId(i);
@@ -33,7 +33,7 @@ public class GebruikersService {
         return gebruikerRepository.save(gebruikerDto);
     }
 
-    public GebruikerDto updateGebruiker(Long gebruikerId, GebruikerDto updatedGebruikerDto) {
+    public GebruikerDto updateGebruiker(final Long gebruikerId, final GebruikerDto updatedGebruikerDto) {
         final GebruikerDto gebruiker = gebruikerRepository.findById(gebruikerId).orElse(null);
         if (gebruiker == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Gebruiker bestaat niet");
