@@ -1,9 +1,9 @@
 package nl.vandalist.repository;
 
-import nl.vandalist.model.GebruikerDto;
+import nl.vandalist.model.CountryDto;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GebruikerRepository extends CrudRepository<GebruikerDto, Long> {
+public interface CountryRepository extends CrudRepository<CountryDto, Long> {
 }

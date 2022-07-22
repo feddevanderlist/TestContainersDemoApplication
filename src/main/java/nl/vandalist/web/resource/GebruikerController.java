@@ -10,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/gebruikers")
@@ -28,6 +29,7 @@ public class GebruikerController {
     )
     public ResponseEntity<List<GebruikerDto>> getGebruikers(final HttpServletRequest request) {
         final List<GebruikerDto> gebruikers = gebruikersService.getGebruikers();
+
         return ResponseEntity.ok(gebruikers);
     }
 

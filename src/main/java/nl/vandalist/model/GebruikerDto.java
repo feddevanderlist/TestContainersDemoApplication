@@ -1,32 +1,36 @@
 package nl.vandalist.model;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.cassandra.core.mapping.Column;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
+
+import javax.persistence.*;
 
 
 @Getter
 @Setter
 @Builder
-@Table("gebruiker")
+@Table(name = "gebruiker")
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class GebruikerDto {
 
-    @PrimaryKey
     @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NonNull
+    @Column
     private String voornaam;
     @NonNull
+    @Column
     private String achternaam;
     @NonNull
+    @Column
     private Integer leeftijd;
     @NonNull
+    @Column
     private String titel;
-    @Column("is_admin")
+    @Column(name = "is_admin")
     private boolean isAdmin;
 
 }

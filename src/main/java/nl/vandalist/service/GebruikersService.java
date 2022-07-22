@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class GebruikersService {
@@ -16,7 +19,8 @@ public class GebruikersService {
     private GebruikerRepository gebruikerRepository;
 
     public List<GebruikerDto> getGebruikers() {
-        return gebruikerRepository.findAll();
+        return StreamSupport.stream(gebruikerRepository.findAll().spliterator(), false)
+                .toList();
     }
 
     public GebruikerDto getGebruikerById(final Long id) {
@@ -24,12 +28,6 @@ public class GebruikersService {
     }
 
     public GebruikerDto createGebruiker(final GebruikerDto gebruikerDto) {
-        for (long i = 1L; i < Integer.MAX_VALUE; i++) {
-            if (gebruikerRepository.findById(i).isEmpty()) {
-                gebruikerDto.setId(i);
-                break;
-            }
-        }
         return gebruikerRepository.save(gebruikerDto);
     }
 

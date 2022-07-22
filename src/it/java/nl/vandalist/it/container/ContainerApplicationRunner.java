@@ -12,7 +12,7 @@ import java.util.List;
  * Je definieert containers als class in de containers package, en dan verwijs je daarnaar vanuit deze class.
  */
 public class ContainerApplicationRunner implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-    private final List<Container> containers = List.of(new CassandraContainerConfig());
+    private final List<Container> containers = List.of(new PostgressContainerConfig());
 
     @Override
     public void initialize(@NotNull ConfigurableApplicationContext applicationContext) {
