@@ -2,8 +2,8 @@ package nl.vandalist.model;
 
 import lombok.*;
 
-
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -22,19 +22,24 @@ public class BookDto {
 
     @NonNull
     @Column
-    String title;
+    private String title;
 
     @NonNull
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id")
-    AuthorDto author;
-
-    @OneToMany(targetEntity = GenreDto.class)
-    Set<GenreDto> genres;
+    private AuthorDto author;
 
     @NonNull
     @OneToOne
     @JoinColumn(name = "language_id", referencedColumnName = "id")
-    LanguageDto language;
+    private LanguageDto language;
+
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "book_genre",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private Set<GenreDto> genres = new HashSet<>();
 
 }

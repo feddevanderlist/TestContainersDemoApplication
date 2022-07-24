@@ -20,8 +20,8 @@ public class CountryDto {
     private Long id;
     @NonNull
     @Column
-    String name;
+    private String name;
     @NonNull
     @Column
-    String capital;
+    private String capital;
 }

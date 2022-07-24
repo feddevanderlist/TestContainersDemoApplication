@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -20,23 +21,27 @@ public class AuthorDto {
     private Long id;
     @NonNull
     @Column(name = "first_name")
-    String firstName;
+    private String firstName;
     @NonNull
     @Column(name = "last_name")
-    String lastName;
+    private String lastName;
 
     @NonNull
     @OneToOne
     @JoinColumn(name = "origin_id", referencedColumnName = "id")
-    CountryDto countryOfOrigin;
+    private CountryDto countryOfOrigin;
     @NonNull
     @OneToOne
-    @JoinColumn(name = "Residence_id", referencedColumnName = "id")
-    CountryDto countryOfResidence;
+    @JoinColumn(name = "residence_id", referencedColumnName = "id")
+    private CountryDto countryOfResidence;
     @NonNull
     @Column(name = "date_of_birth")
-    Date dateOfBirth;
+    private Date dateOfBirth;
 
-    @OneToMany(targetEntity = LanguageDto.class)
-    Set<LanguageDto> languages;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "author_language",
+            joinColumns = @JoinColumn(name = "author_id"),
+            inverseJoinColumns = @JoinColumn(name = "language_id")
+    )
+    private Set<LanguageDto> languages = new HashSet<>();
 }

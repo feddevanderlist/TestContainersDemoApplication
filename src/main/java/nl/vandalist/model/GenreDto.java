@@ -3,6 +3,8 @@ package nl.vandalist.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,5 +21,8 @@ public class GenreDto {
     private Long id;
     @NonNull
     @Column
-    String name;
+    private String name;
+
+    @ManyToMany(mappedBy = "genres", cascade = CascadeType.ALL)
+    private Set<BookDto> books = new HashSet<>();
 }
