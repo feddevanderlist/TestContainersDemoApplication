@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -26,5 +25,9 @@ public class AuthorService {
     public List<AuthorDto> getAllAuthorsByName(String authorName) {
         return authorRepository.findAllByFirstNameOrLastName(authorName, authorName);
 
+    }
+
+    public AuthorDto createAuthor(AuthorDto authorDto) {
+        return authorRepository.save(authorDto);
     }
 }

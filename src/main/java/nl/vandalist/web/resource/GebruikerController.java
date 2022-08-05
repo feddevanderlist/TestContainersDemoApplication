@@ -10,7 +10,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/gebruikers")
@@ -63,7 +62,8 @@ public class GebruikerController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<GebruikerDto> updateGebruiker(@PathVariable("gebruikerId") final Long gebruikerId, @RequestBody final GebruikerDto gebruikerDto) {
+    public ResponseEntity<GebruikerDto> updateGebruiker(@PathVariable("gebruikerId") final Long gebruikerId,
+                                                        @RequestBody final GebruikerDto gebruikerDto) {
         if (gebruikerId == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Er is geen gebruiker id mee gegeven.");
         }
