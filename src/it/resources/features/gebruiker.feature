@@ -1,6 +1,7 @@
 #language: nl
 Functionaliteit: Werken met gebruiker
-
+Achtergrond:
+  Gegeven de "gebruiker" sql is ingelezen
   Scenario: Haal alle gebruikers op
     Als de gebruiker alle gebruikers ophaalt
     Dan heeft hij 1 gebruikers

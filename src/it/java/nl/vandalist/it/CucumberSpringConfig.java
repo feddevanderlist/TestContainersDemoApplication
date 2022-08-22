@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 
 import javax.annotation.PostConstruct;
@@ -24,7 +25,7 @@ import javax.annotation.PostConstruct;
 @CucumberContextConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(initializers = ContainerApplicationRunner.class, classes = TestConfig.class)
-//@DirtiesContext // Deze annotatie zorgt ervoor dat de database wordt geschoond tussen ieder scenario
+@DirtiesContext // Deze annotatie zorgt ervoor dat de database wordt geschoond tussen ieder scenario
 public class CucumberSpringConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(CucumberSpringConfig.class);
 
