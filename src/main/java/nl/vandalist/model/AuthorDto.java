@@ -3,6 +3,7 @@ package nl.vandalist.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,7 +37,7 @@ public class AuthorDto {
     private CountryDto countryOfResidence;
     @NonNull
     @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "author_language",

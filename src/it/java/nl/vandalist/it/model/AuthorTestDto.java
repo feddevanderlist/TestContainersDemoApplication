@@ -2,6 +2,7 @@ package nl.vandalist.it.model;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,6 +19,6 @@ public class AuthorTestDto {
     private String lastName;
     private CountryTestDto countryOfOrigin;
     private CountryTestDto countryOfResidence;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private Set<LanguageTestDto> languages = new HashSet<>();
 }

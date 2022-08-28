@@ -32,11 +32,11 @@ public class AuthorController {
     }
 
     @GetMapping(
-            value = "{authorId}",
+            value = "/{authorId}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<AuthorDto> getAuthorById(@PathVariable("authorId") Long authorId) {
+    public ResponseEntity<AuthorDto> getAuthor(@PathVariable("authorId") final Long authorId) {
         if (authorId == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No author id in request");
         }
@@ -48,11 +48,11 @@ public class AuthorController {
     }
 
     @GetMapping(
-            value = "{authorName}",
+            value = "/{authorName}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<List<AuthorDto>> getAuthorByName(@PathVariable("authorName") String authorName) {
+    public ResponseEntity<List<AuthorDto>> getAuthorByName(@PathVariable("authorName") final String authorName) {
         if (authorName == null || authorName.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No author id in request");
         }

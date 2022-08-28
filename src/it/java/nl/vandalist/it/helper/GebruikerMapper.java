@@ -9,7 +9,7 @@ import java.util.Map;
 public class GebruikerMapper {
 
     public GebruikerTestDto converteerCucumberMapToGebruikerTestDto(final Map<String, String> gebruikerGegevens) {
-        GebruikerTestDto gebruikerTestDto = new GebruikerTestDto();
+        final GebruikerTestDto gebruikerTestDto = new GebruikerTestDto();
 
         gebruikerTestDto.setId(Long.valueOf(gebruikerGegevens.get("id")));
         gebruikerTestDto.setVoornaam(gebruikerGegevens.get("voornaam"));
