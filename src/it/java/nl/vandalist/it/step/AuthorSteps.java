@@ -41,7 +41,7 @@ public class AuthorSteps {
     @Dan("heeft hij {int} author")
     public void heeftHijAuthor(final int aantalAuthors) {
         final Response response = state.getResponse();
-        Assertions.assertEquals(200, response.getStatusCode());
+        Assertions.assertEquals(200, response.getStatusCode(), response.getBody().prettyPrint());
         Assertions.assertEquals(aantalAuthors, response.getBody().jsonPath().getList("", AuthorTestDto.class).size());
     }
 
@@ -56,8 +56,8 @@ public class AuthorSteps {
                 () -> Assertions.assertEquals(expectedAuthor.getFirstName(), author.getFirstName()),
                 () -> Assertions.assertEquals(expectedAuthor.getLastName(), author.getLastName()),
                 () -> Assertions.assertEquals(expectedAuthor.getDateOfBirth(), author.getDateOfBirth()),
-                () -> Assertions.assertEquals(expectedAuthor.getCountryOfOrigin(), author.getCountryOfOrigin()),
-                () -> Assertions.assertEquals(expectedAuthor.getCountryOfResidence(), author.getCountryOfResidence())
+                () -> Assertions.assertEquals(expectedAuthor.getCountryOfOrigin().getId(), author.getCountryOfOrigin().getId()),
+                () -> Assertions.assertEquals(expectedAuthor.getCountryOfResidence().getId(), author.getCountryOfResidence().getId())
         );
 
     }

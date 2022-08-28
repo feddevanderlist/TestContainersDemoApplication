@@ -2,7 +2,9 @@ package nl.vandalist.service;
 
 import nl.vandalist.model.AuthorDto;
 import nl.vandalist.repository.AuthorRepository;
+import nl.vandalist.web.helpers.AuthorFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

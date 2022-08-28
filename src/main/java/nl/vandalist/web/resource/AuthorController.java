@@ -2,6 +2,7 @@ package nl.vandalist.web.resource;
 
 import nl.vandalist.model.AuthorDto;
 import nl.vandalist.service.AuthorService;
+import nl.vandalist.web.helpers.AuthorFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +27,16 @@ public class AuthorController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<List<AuthorDto>> getAllAuthors() {
+    public ResponseEntity<List<AuthorDto>> getAllAuthors(@RequestParam(required = false, name = "authorName") final String authorName) {
         List<AuthorDto> authors = authorService.getAllAuthors();
+        if (authorName != null && !authorName.isEmpty()) {
+            List<AuthorDto> authorFirst = new java.util.ArrayList<>(authors = authors.stream().filter(authorDto -> authorDto.getFirstName().toLowerCase().contains(authorName.toLowerCase())).toList());
+            List<AuthorDto> authorLast = authors.stream().filter(authorDto -> authorDto.getLastName().toLowerCase().contains(authorName.toLowerCase())).toList();
+            authorFirst.addAll(authorLast);
+            authors = authorFirst;
+        }
+
+
         return ResponseEntity.ok(authors);
     }
 
@@ -41,22 +50,6 @@ public class AuthorController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No author id in request");
         }
         final AuthorDto author = authorService.getAuthorById(authorId);
-        if (author == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No author found by id");
-        }
-        return ResponseEntity.ok(author);
-    }
-
-    @GetMapping(
-            value = "/{authorName}",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public ResponseEntity<List<AuthorDto>> getAuthorByName(@PathVariable("authorName") final String authorName) {
-        if (authorName == null || authorName.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No author id in request");
-        }
-        final List<AuthorDto> author = authorService.getAllAuthorsByName(authorName);
         if (author == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No author found by id");
         }
