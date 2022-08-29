@@ -2,7 +2,6 @@ package nl.vandalist.web.resource;
 
 import nl.vandalist.model.AuthorDto;
 import nl.vandalist.service.AuthorService;
-import nl.vandalist.web.helpers.AuthorFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +27,7 @@ public class AuthorController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<List<AuthorDto>> getAllAuthors(@RequestParam(required = false, name = "authorName") final String authorName) {
-        List<AuthorDto> authors = authorService.getAllAuthors();
+        List<AuthorDto> authors = authorService.getAuthors();
         if (authorName != null && !authorName.isEmpty()) {
             List<AuthorDto> authorFirst = new java.util.ArrayList<>(authors = authors.stream().filter(authorDto -> authorDto.getFirstName().toLowerCase().contains(authorName.toLowerCase())).toList());
             List<AuthorDto> authorLast = authors.stream().filter(authorDto -> authorDto.getLastName().toLowerCase().contains(authorName.toLowerCase())).toList();
@@ -62,6 +61,7 @@ public class AuthorController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<AuthorDto> createAuthor(@RequestBody final AuthorDto authorDto) {
+        authorDto.setId(null);
         final AuthorDto newAuthor = authorService.createAuthor(authorDto);
 
         return ResponseEntity.ok(newAuthor);

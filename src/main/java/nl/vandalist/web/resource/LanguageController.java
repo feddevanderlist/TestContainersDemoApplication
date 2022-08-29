@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -25,28 +24,21 @@ public class LanguageController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<List<LanguageDto>> getLanguages(final HttpServletRequest request) {
-        final List<LanguageDto> languages = languageService.getLanguages();
+    public ResponseEntity<List<LanguageDto>> getLanguages(@RequestParam(required = false, name = "languageTitle") final String languageName) {
+        List<LanguageDto> countries = languageService.getLanguages();
+        if (languageName != null && !languageName.isEmpty()) {
+            countries = countries.stream().filter(languageDto -> languageDto.getName().toLowerCase().contains(languageName.toLowerCase())).toList();
+        }
 
-        return ResponseEntity.ok(languages);
+        return ResponseEntity.ok(countries);
     }
 
     @GetMapping(value = "/{languageId}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<LanguageDto> getLanguage(@PathVariable("languageId") final Long languageId) {
+    public ResponseEntity<LanguageDto> getLanguageById(@PathVariable("languageId") final Long languageId) {
         final LanguageDto languages = languageService.getLanguageById(languageId);
-
-        return ResponseEntity.ok(languages);
-    }
-
-    @GetMapping(value = "/{languageName}",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public ResponseEntity<List<LanguageDto>> getLanguageByName(@PathVariable("languageName") final String languageName) {
-        final List<LanguageDto> languages = languageService.getLanguageByName(languageName);
 
         return ResponseEntity.ok(languages);
     }
@@ -60,6 +52,7 @@ public class LanguageController {
         if (languageDto.getName().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Geen language meegegeven aan functie");
         }
+        languageDto.setId(null);
         final LanguageDto newLanguage = languageService.createLanguage(languageDto);
 
         return ResponseEntity.ok(newLanguage);
@@ -73,7 +66,7 @@ public class LanguageController {
                                                       @RequestBody final LanguageDto languageDto) {
 
         if (languageId == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Geen ID megegeven aan request");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Geen ID meegegeven aan request");
         }
         final LanguageDto newLanguage = languageService.updateLanguage(languageId, languageDto);
         if (newLanguage == null) {

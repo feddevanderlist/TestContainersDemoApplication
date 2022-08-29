@@ -20,7 +20,7 @@ public class AuthorMapper {
         authorTestDto.setFirstName(authorGegevens.get("first_name"));
         authorTestDto.setLastName(authorGegevens.get("last_name"));
         authorTestDto.setDateOfBirth(LocalDateTime.parse(authorGegevens.get("date_of_birth"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS")).toLocalDate());
-        authorTestDto.setCountryOfOrigin(getCountryOfOriginFromGegegevens(authorGegevens));
+        authorTestDto.setCountryOfOrigin(getCountryOfOriginFromGegevens(authorGegevens));
         authorTestDto.setCountryOfResidence(getCountryOfResidenceFromGegevens(authorGegevens));
 
         return authorTestDto;
@@ -35,7 +35,7 @@ public class AuthorMapper {
         return countryOfResidence;
     }
 
-    private CountryTestDto getCountryOfOriginFromGegegevens(final Map<String, String> authorGegevens) {
+    private CountryTestDto getCountryOfOriginFromGegevens(final Map<String, String> authorGegevens) {
         final CountryTestDto countryOfOrigin = new CountryTestDto();
         countryOfOrigin.setId(Long.valueOf(authorGegevens.get("origin_id")));
         countryOfOrigin.setName(authorGegevens.get("origin_country_name"));

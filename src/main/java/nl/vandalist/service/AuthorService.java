@@ -16,7 +16,7 @@ public class AuthorService {
     @Autowired
     private AuthorRepository authorRepository;
 
-    public List<AuthorDto> getAllAuthors() {
+    public List<AuthorDto> getAuthors() {
         return StreamSupport.stream(authorRepository.findAll().spliterator(), false).toList();
     }
 
