@@ -52,7 +52,6 @@ public class AuthorSteps {
         final AuthorTestDto author = response.getBody().as(AuthorTestDto.class);
         final AuthorTestDto expectedAuthor = authorMapper.converteerCucumberMapToAuthorTestDto(expectedAuthorString.get(0));
         Assertions.assertAll(
-                () -> Assertions.assertEquals(expectedAuthor.getId(), author.getId()),
                 () -> Assertions.assertEquals(expectedAuthor.getFirstName(), author.getFirstName()),
                 () -> Assertions.assertEquals(expectedAuthor.getLastName(), author.getLastName()),
                 () -> Assertions.assertEquals(expectedAuthor.getDateOfBirth(), author.getDateOfBirth()),

@@ -66,4 +66,17 @@ public class AuthorController {
 
         return ResponseEntity.ok(newAuthor);
     }
+
+    @PutMapping(
+            value = "",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<AuthorDto> updateAuthor(@PathVariable("authorId") final Long authorId, @RequestBody final AuthorDto authorDto) {
+        if (authorId == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No author ID in request param");
+        }
+        final AuthorDto newAuthor = authorService.updateAuthor(authorId, authorDto);
+        return ResponseEntity.ok(newAuthor);
+    }
 }

@@ -2,10 +2,10 @@ package nl.vandalist.service;
 
 import nl.vandalist.model.AuthorDto;
 import nl.vandalist.repository.AuthorRepository;
-import nl.vandalist.web.helpers.AuthorFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.StreamSupport;
@@ -20,16 +20,23 @@ public class AuthorService {
         return StreamSupport.stream(authorRepository.findAll().spliterator(), false).toList();
     }
 
-    public AuthorDto getAuthorById(Long authorId) {
+    public AuthorDto getAuthorById(final Long authorId) {
         return authorRepository.findById(authorId).orElse(null);
     }
 
-    public List<AuthorDto> getAllAuthorsByName(String authorName) {
-        return authorRepository.findAllByFirstNameOrLastName(authorName, authorName);
 
+    public AuthorDto createAuthor(final AuthorDto authorDto) {
+        authorDto.setId(null);
+        return authorRepository.save(authorDto);
     }
 
-    public AuthorDto createAuthor(AuthorDto authorDto) {
-        return authorRepository.save(authorDto);
+    public AuthorDto updateAuthor(final Long authorId, final AuthorDto updatedAuthorDto) {
+        final AuthorDto author = authorRepository.findById(authorId).orElse(null);
+        if (author == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    String.format("Author with id %s does not exist", authorId));
+        }
+        updatedAuthorDto.setId(author.getId());
+        return authorRepository.save(updatedAuthorDto);
     }
 }

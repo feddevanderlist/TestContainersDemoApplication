@@ -4,6 +4,7 @@ import nl.vandalist.it.model.GebruikerTestDto;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class GebruikerMapper {
@@ -11,7 +12,9 @@ public class GebruikerMapper {
     public GebruikerTestDto converteerCucumberMapToGebruikerTestDto(final Map<String, String> gebruikerGegevens) {
         final GebruikerTestDto gebruikerTestDto = new GebruikerTestDto();
 
-        gebruikerTestDto.setId(Long.valueOf(gebruikerGegevens.get("id")));
+        if (!Objects.equals(gebruikerGegevens.get("id"), null)) {
+            gebruikerTestDto.setId(Long.valueOf(gebruikerGegevens.get("id")));
+        }
         gebruikerTestDto.setVoornaam(gebruikerGegevens.get("voornaam"));
         gebruikerTestDto.setAchternaam(gebruikerGegevens.get("achternaam"));
         gebruikerTestDto.setLeeftijd(Integer.valueOf(gebruikerGegevens.get("leeftijd")));

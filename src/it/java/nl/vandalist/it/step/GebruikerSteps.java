@@ -58,7 +58,6 @@ public class GebruikerSteps {
         final GebruikerTestDto gebruiker = gebruikerResponse.getBody().as(GebruikerTestDto.class);
         final GebruikerTestDto expectedGebruiker = gebruikerMapper.converteerCucumberMapToGebruikerTestDto(gebruikerGegevens.get(0));
         Assertions.assertAll(
-                () -> Assertions.assertEquals(expectedGebruiker.getId(), gebruiker.getId()),
                 () -> Assertions.assertEquals(expectedGebruiker.getVoornaam(), gebruiker.getVoornaam()),
                 () -> Assertions.assertEquals(expectedGebruiker.getAchternaam(), gebruiker.getAchternaam()),
                 () -> Assertions.assertEquals(expectedGebruiker.getLeeftijd(), gebruiker.getLeeftijd()),

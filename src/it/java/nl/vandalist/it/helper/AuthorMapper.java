@@ -7,14 +7,16 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class AuthorMapper {
 
     public AuthorTestDto converteerCucumberMapToAuthorTestDto(final Map<String, String> authorGegevens) {
         final AuthorTestDto authorTestDto = new AuthorTestDto();
-
-        authorTestDto.setId(Long.valueOf(authorGegevens.get("id")));
+        if (!Objects.equals(authorGegevens.get("id"), null)) {
+            authorTestDto.setId(Long.valueOf(authorGegevens.get("id")));
+        }
         authorTestDto.setFirstName(authorGegevens.get("first_name"));
         authorTestDto.setLastName(authorGegevens.get("last_name"));
         authorTestDto.setDateOfBirth(LocalDateTime.parse(authorGegevens.get("date_of_birth"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS")).toLocalDate());
