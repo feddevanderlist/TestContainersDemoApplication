@@ -17,6 +17,8 @@ public interface Container {
      */
     void start();
 
+    void stop();
+
     /**
      * Deze properties worden toegevoegd aan de Spring ApplicationContext.
      *

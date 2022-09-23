@@ -53,6 +53,7 @@ public class GebruikerController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<GebruikerDto> saveGebruiker(@RequestBody final GebruikerDto gebruikerDto) {
+        gebruikerDto.setId(null);
         final GebruikerDto nieuweGebruiker = gebruikersService.createGebruiker(gebruikerDto);
         return ResponseEntity.ok(nieuweGebruiker);
     }

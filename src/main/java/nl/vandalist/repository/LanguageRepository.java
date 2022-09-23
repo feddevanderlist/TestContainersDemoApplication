@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface LanguageRepository extends CrudRepository<LanguageDto, Long> {
 
-    List<LanguageDto> findLanguageDtosByNameContainingIgnoreCase(@NonNull String name);
+    List<LanguageDto> findLanguagesByNameContainingIgnoreCase(@NonNull String name);
 }

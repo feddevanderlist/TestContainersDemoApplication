@@ -30,8 +30,13 @@ public class PostgressContainerConfig implements Container {
     @Override
     public void start() {
         postgress.start();
+    }
 
-        fillDatabase();
+
+    @Override
+    public void stop() {
+        postgress.close();
+        //do nothing, JVM handles shut down
     }
 
     private void fillDatabase() {
@@ -39,10 +44,14 @@ public class PostgressContainerConfig implements Container {
         final ClassLoader classLoader = PostgressContainerConfig.class.getClassLoader();
         final Set<String> files = listFilesUsingFileWalk(classLoader);
         JdbcDatabaseDelegate containerDelegate = new JdbcDatabaseDelegate(postgress, "");
-
-
         files.parallelStream().forEach(fileName ->
                 ScriptUtils.runInitScript(containerDelegate, POSTGRESS_SCRIPT_LOCATION + fileName));
+    }
+
+    public static void insertIntoDatabase(String filename) {
+            JdbcDatabaseDelegate containerDelegate = new JdbcDatabaseDelegate(postgress, "");
+            ScriptUtils.runInitScript(containerDelegate, POSTGRESS_SCRIPT_LOCATION + filename + ".sql");
+
     }
 
     private Set<String> listFilesUsingFileWalk(final ClassLoader classLoader) {

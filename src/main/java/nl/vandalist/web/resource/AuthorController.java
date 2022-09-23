@@ -26,37 +26,29 @@ public class AuthorController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<List<AuthorDto>> getAllAuthors() {
-        List<AuthorDto> authors = authorService.getAllAuthors();
+    public ResponseEntity<List<AuthorDto>> getAllAuthors(@RequestParam(required = false, name = "authorName") final String authorName) {
+        List<AuthorDto> authors = authorService.getAuthors();
+        if (authorName != null && !authorName.isEmpty()) {
+            List<AuthorDto> authorFirst = new java.util.ArrayList<>(authors = authors.stream().filter(authorDto -> authorDto.getFirstName().toLowerCase().contains(authorName.toLowerCase())).toList());
+            List<AuthorDto> authorLast = authors.stream().filter(authorDto -> authorDto.getLastName().toLowerCase().contains(authorName.toLowerCase())).toList();
+            authorFirst.addAll(authorLast);
+            authors = authorFirst;
+        }
+
+
         return ResponseEntity.ok(authors);
     }
 
     @GetMapping(
-            value = "{authorId}",
+            value = "/{authorId}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<AuthorDto> getAuthorById(@PathVariable("authorId") Long authorId) {
+    public ResponseEntity<AuthorDto> getAuthor(@PathVariable("authorId") final Long authorId) {
         if (authorId == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No author id in request");
         }
         final AuthorDto author = authorService.getAuthorById(authorId);
-        if (author == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No author found by id");
-        }
-        return ResponseEntity.ok(author);
-    }
-
-    @GetMapping(
-            value = "{authorName}",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public ResponseEntity<List<AuthorDto>> getAuthorByName(@PathVariable("authorName") String authorName) {
-        if (authorName == null || authorName.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No author id in request");
-        }
-        final List<AuthorDto> author = authorService.getAllAuthorsByName(authorName);
         if (author == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No author found by id");
         }
@@ -69,8 +61,22 @@ public class AuthorController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<AuthorDto> createAuthor(@RequestBody final AuthorDto authorDto) {
+        authorDto.setId(null);
         final AuthorDto newAuthor = authorService.createAuthor(authorDto);
 
+        return ResponseEntity.ok(newAuthor);
+    }
+
+    @PutMapping(
+            value = "",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<AuthorDto> updateAuthor(@PathVariable("authorId") final Long authorId, @RequestBody final AuthorDto authorDto) {
+        if (authorId == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No author ID in request param");
+        }
+        final AuthorDto newAuthor = authorService.updateAuthor(authorId, authorDto);
         return ResponseEntity.ok(newAuthor);
     }
 }

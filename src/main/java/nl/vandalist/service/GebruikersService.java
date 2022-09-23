@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -34,7 +32,8 @@ public class GebruikersService {
     public GebruikerDto updateGebruiker(final Long gebruikerId, final GebruikerDto updatedGebruikerDto) {
         final GebruikerDto gebruiker = gebruikerRepository.findById(gebruikerId).orElse(null);
         if (gebruiker == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Gebruiker bestaat niet");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Gebruiker bestaat niet");
         }
 
         updatedGebruikerDto.setId(gebruiker.getId());

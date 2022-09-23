@@ -22,12 +22,8 @@ public class LanguageService {
         return languageRepository.findById(languageId).orElse(null);
     }
 
-    public List<LanguageDto> getLanguageByName(final String languageName) {
-        return languageRepository.findLanguageDtosByNameContainingIgnoreCase(languageName);
-    }
-
     public LanguageDto createLanguage(final LanguageDto languageDto) {
-        List<LanguageDto> byNameLanguage = languageRepository.findLanguageDtosByNameContainingIgnoreCase(languageDto.getName());
+        List<LanguageDto> byNameLanguage = languageRepository.findLanguagesByNameContainingIgnoreCase(languageDto.getName());
         Optional<LanguageDto> byIdLanguage = languageRepository.findById(languageDto.getId());
         if (!byNameLanguage.isEmpty()) {
             return byNameLanguage.get(0);

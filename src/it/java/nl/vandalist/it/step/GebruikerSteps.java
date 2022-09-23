@@ -3,7 +3,9 @@ package nl.vandalist.it.step;
 import io.cucumber.java.nl.Als;
 import io.cucumber.java.nl.Dan;
 import io.cucumber.java.nl.En;
+import io.cucumber.java.nl.Gegeven;
 import io.restassured.response.Response;
+import nl.vandalist.it.container.PostgressContainerConfig;
 import nl.vandalist.it.helper.GebruikerMapper;
 import nl.vandalist.it.model.GebruikerTestDto;
 import nl.vandalist.it.support.GebruikersServiceTest;
@@ -56,7 +58,6 @@ public class GebruikerSteps {
         final GebruikerTestDto gebruiker = gebruikerResponse.getBody().as(GebruikerTestDto.class);
         final GebruikerTestDto expectedGebruiker = gebruikerMapper.converteerCucumberMapToGebruikerTestDto(gebruikerGegevens.get(0));
         Assertions.assertAll(
-                () -> Assertions.assertEquals(expectedGebruiker.getId(), gebruiker.getId()),
                 () -> Assertions.assertEquals(expectedGebruiker.getVoornaam(), gebruiker.getVoornaam()),
                 () -> Assertions.assertEquals(expectedGebruiker.getAchternaam(), gebruiker.getAchternaam()),
                 () -> Assertions.assertEquals(expectedGebruiker.getLeeftijd(), gebruiker.getLeeftijd()),
@@ -77,5 +78,10 @@ public class GebruikerSteps {
         final GebruikerTestDto nieuweGebruiker = gebruikerMapper.converteerCucumberMapToGebruikerTestDto(gebruikerGegevens.get(0));
         final Response nieuweGebruikerResponse = gebruikersService.updateGebruiker(nieuweGebruiker.getId(), nieuweGebruiker);
         state.setResponse(nieuweGebruikerResponse);
+    }
+
+    @Gegeven("de {string} sql is ingelezen")
+    public void deGebruikerSqlIsIngelezen(final String filename) {
+        PostgressContainerConfig.insertIntoDatabase(filename);
     }
 }
