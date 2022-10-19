@@ -26,12 +26,12 @@ public class BookController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<List<BookDto>> getAllBooks(@RequestParam(required = false, name = "bookTitle") final String bookName) {
-        List<BookDto> countries = bookService.getBooks();
+        List<BookDto> books = bookService.getBooks();
         if (bookName != null && !bookName.isEmpty()) {
-            countries = countries.stream().filter(bookDto -> bookDto.getTitle().toLowerCase().contains(bookName.toLowerCase())).toList();
+            books = books.stream().filter(bookDto -> bookDto.getTitle().toLowerCase().contains(bookName.toLowerCase())).toList();
         }
 
-        return ResponseEntity.ok(countries);
+        return ResponseEntity.ok(books);
     }
 
     @GetMapping(value = "/{bookId}",

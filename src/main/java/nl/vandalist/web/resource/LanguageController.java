@@ -26,12 +26,12 @@ public class LanguageController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<List<LanguageDto>> getLanguages(@RequestParam(required = false, name = "languageTitle") final String languageName) {
-        List<LanguageDto> countries = languageService.getLanguages();
+        List<LanguageDto> languages = languageService.getLanguages();
         if (languageName != null && !languageName.isEmpty()) {
-            countries = countries.stream().filter(languageDto -> languageDto.getName().toLowerCase().contains(languageName.toLowerCase())).toList();
+            languages = languages.stream().filter(languageDto -> languageDto.getName().toLowerCase().contains(languageName.toLowerCase())).toList();
         }
 
-        return ResponseEntity.ok(countries);
+        return ResponseEntity.ok(languages);
     }
 
     @GetMapping(value = "/{languageId}",

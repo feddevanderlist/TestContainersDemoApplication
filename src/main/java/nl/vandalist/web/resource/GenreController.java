@@ -28,12 +28,12 @@ public class GenreController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<List<GenreDto>> getGenres(@RequestParam(required = false, name = "genreName") final String genreName) {
-        List<GenreDto> countries = genreService.getGenres();
+        List<GenreDto> genres = genreService.getGenres();
         if (genreName != null && !genreName.isEmpty()) {
-            countries = countries.stream().filter(genreDto -> genreDto.getName().toLowerCase().contains(genreName.toLowerCase())).toList();
+            genres = genres.stream().filter(genreDto -> genreDto.getName().toLowerCase().contains(genreName.toLowerCase())).toList();
         }
 
-        return ResponseEntity.ok(countries);
+        return ResponseEntity.ok(genres);
     }
 
     @GetMapping(
