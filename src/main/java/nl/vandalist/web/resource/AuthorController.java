@@ -67,7 +67,7 @@ public class AuthorController {
         return ResponseEntity.ok(newAuthor);
     }
 
-    @PutMapping(
+    @PatchMapping(
             value = "",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
@@ -78,5 +78,19 @@ public class AuthorController {
         }
         final AuthorDto newAuthor = authorService.updateAuthor(authorId, authorDto);
         return ResponseEntity.ok(newAuthor);
+    }
+
+    @DeleteMapping(
+            value = "/{authorId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<AuthorDto> deleteAuthor(@PathVariable("authorId") final Long authorId) {
+        if (authorId == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No author ID in request param");
+        }
+        authorService.deleteAuthor(authorId);
+
+        return ResponseEntity.accepted().build();
     }
 }

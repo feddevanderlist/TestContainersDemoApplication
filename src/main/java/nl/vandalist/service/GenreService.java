@@ -38,4 +38,12 @@ public class GenreService {
         updatedGenreDto.setId(genre.getId());
         return genreRepository.save(updatedGenreDto);
     }
+
+    public void deleteGenre(final Long genreId) {
+        final GenreDto toBeDeletedDto = this.getGenreById(genreId);
+        if (toBeDeletedDto == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("The genre with %s does not exist in the database", genreId));
+        }
+        genreRepository.delete(toBeDeletedDto);
+    }
 }

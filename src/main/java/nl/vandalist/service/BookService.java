@@ -39,4 +39,12 @@ public class BookService {
         updatedBookDto.setId(book.getId());
         return bookRepository.save(updatedBookDto);
     }
+
+    public void deleteBook(final Long bookId) {
+        final BookDto toBeDeletedDto = this.getBookById(bookId);
+        if (toBeDeletedDto == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("The book with %s does not exist in the database", bookId));
+        }
+        bookRepository.delete(toBeDeletedDto);
+    }
 }

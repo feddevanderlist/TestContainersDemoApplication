@@ -16,3 +16,7 @@ In dit project is het doel om alle api calls te testen. De volgende urls zijn aa
 - /language (GET,POST,PATCH, DELETE)
 
 in de folder staat het database model [database model](dbmodel.png)
+
+Voor GET all is een 200 met empty body de verwachting <br>
+Voor de GET by name is dit d.m.v. `?genreName= ` <br>
+Voor DELETE geld dat er een 202 terug komt

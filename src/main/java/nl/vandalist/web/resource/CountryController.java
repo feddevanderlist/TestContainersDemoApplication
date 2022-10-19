@@ -1,5 +1,6 @@
 package nl.vandalist.web.resource;
 
+import nl.vandalist.model.AuthorDto;
 import nl.vandalist.model.CountryDto;
 import nl.vandalist.service.CountryService;
 import org.springframework.http.HttpStatus;
@@ -63,7 +64,7 @@ public class CountryController {
         return ResponseEntity.ok(newCountry);
     }
 
-    @PutMapping(
+    @PatchMapping(
             value = "",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
@@ -74,5 +75,19 @@ public class CountryController {
         }
         final CountryDto newCountry = countryService.updateCountry(countryId, countryDto);
         return ResponseEntity.ok(newCountry);
+    }
+
+    @DeleteMapping(
+            value = "/{countryId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<AuthorDto> deleteCountry(@PathVariable("countryId") final Long countryId) {
+        if (countryId == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No country ID in request param");
+        }
+        countryService.deleteCountry(countryId);
+
+        return ResponseEntity.accepted().build();
     }
 }

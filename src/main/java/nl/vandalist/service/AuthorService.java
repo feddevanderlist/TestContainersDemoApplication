@@ -39,4 +39,13 @@ public class AuthorService {
         updatedAuthorDto.setId(author.getId());
         return authorRepository.save(updatedAuthorDto);
     }
+
+
+    public void deleteAuthor(final Long authorId) {
+        final AuthorDto toBeDeletedDto = this.getAuthorById(authorId);
+        if (toBeDeletedDto == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("The author with %s does not exist in the database", authorId));
+        }
+        authorRepository.delete(toBeDeletedDto);
+    }
 }

@@ -1,5 +1,6 @@
 package nl.vandalist.web.resource;
 
+import nl.vandalist.model.AuthorDto;
 import nl.vandalist.model.BookDto;
 import nl.vandalist.service.BookService;
 import org.springframework.http.HttpStatus;
@@ -65,5 +66,19 @@ public class BookController {
         }
         final BookDto nieuweBook = bookService.updateBook(bookId, bookDto);
         return ResponseEntity.ok(nieuweBook);
+    }
+
+    @DeleteMapping(
+            value = "/{bookId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<AuthorDto> deleteBook(@PathVariable("bookId") final Long bookId) {
+        if (bookId == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No book ID in request param");
+        }
+        bookService.deleteBook(bookId);
+
+        return ResponseEntity.accepted().build();
     }
 }

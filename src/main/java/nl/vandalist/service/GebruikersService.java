@@ -39,4 +39,11 @@ public class GebruikersService {
         updatedGebruikerDto.setId(gebruiker.getId());
         return gebruikerRepository.save(updatedGebruikerDto);
     }
+    public void deleteGebruiker(final Long gebruikerId) {
+        final GebruikerDto toBeDeletedDto = this.getGebruikerById(gebruikerId);
+        if (toBeDeletedDto == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("The gebruiker with %s does not exist in the database", gebruikerId));
+        }
+        gebruikerRepository.delete(toBeDeletedDto);
+    }
 }

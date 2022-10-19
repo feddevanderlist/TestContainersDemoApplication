@@ -1,5 +1,6 @@
 package nl.vandalist.web.resource;
 
+import nl.vandalist.model.AuthorDto;
 import nl.vandalist.model.LanguageDto;
 import nl.vandalist.service.LanguageService;
 import org.springframework.http.HttpStatus;
@@ -73,5 +74,19 @@ public class LanguageController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Er is geen language gevonden voor het meegegeven id");
         }
         return ResponseEntity.ok(newLanguage);
+    }
+
+    @DeleteMapping(
+            value = "/{languageId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<AuthorDto> deleteLanguage(@PathVariable("languageId") final Long languageId) {
+        if (languageId == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No language ID in request param");
+        }
+        languageService.deleteLanguage(languageId);
+
+        return ResponseEntity.accepted().build();
     }
 }

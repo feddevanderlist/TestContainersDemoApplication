@@ -1,5 +1,6 @@
 package nl.vandalist.web.resource;
 
+import nl.vandalist.model.AuthorDto;
 import nl.vandalist.model.GenreDto;
 import nl.vandalist.service.GenreService;
 import org.springframework.http.HttpStatus;
@@ -63,7 +64,7 @@ public class GenreController {
         return ResponseEntity.ok(newGenre);
     }
 
-    @PutMapping(
+    @PatchMapping(
             value = "",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
@@ -74,5 +75,18 @@ public class GenreController {
         }
         final GenreDto newGenre = genreService.updateGenre(genreId, genreDto);
         return ResponseEntity.ok(newGenre);
+    }
+    @DeleteMapping(
+            value = "/{genreId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<AuthorDto> deleteGenre(@PathVariable("genreId") final Long genreId) {
+        if (genreId == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No genre ID in request param");
+        }
+        genreService.deleteGenre(genreId);
+
+        return ResponseEntity.accepted().build();
     }
 }

@@ -1,5 +1,6 @@
 package nl.vandalist.web.resource;
 
+import nl.vandalist.model.AuthorDto;
 import nl.vandalist.model.GebruikerDto;
 import nl.vandalist.service.GebruikersService;
 import org.springframework.http.HttpStatus;
@@ -70,5 +71,19 @@ public class GebruikerController {
         }
         final GebruikerDto nieuweGebruiker = gebruikersService.updateGebruiker(gebruikerId, gebruikerDto);
         return ResponseEntity.ok(nieuweGebruiker);
+    }
+
+    @DeleteMapping(
+            value = "/{gebruikerId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<AuthorDto> deleteGebruiker(@PathVariable("gebruikerId") final Long gebruikerId) {
+        if (gebruikerId == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No gebruiker ID in request param");
+        }
+        gebruikersService.deleteGebruiker(gebruikerId);
+
+        return ResponseEntity.accepted().build();
     }
 }

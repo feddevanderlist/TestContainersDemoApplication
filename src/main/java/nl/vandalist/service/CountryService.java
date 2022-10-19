@@ -39,5 +39,13 @@ public class CountryService {
         updatedCountryDto.setId(country.getId());
         return countryRepository.save(updatedCountryDto);
     }
+
+    public void deleteCountry(final Long countryId) {
+        final CountryDto toBeDeletedDto = this.getCountryById(countryId);
+        if (toBeDeletedDto == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("The country with %s does not exist in the database", countryId));
+        }
+        countryRepository.delete(toBeDeletedDto);
+    }
 }
 

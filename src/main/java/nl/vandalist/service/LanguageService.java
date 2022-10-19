@@ -1,9 +1,12 @@
 package nl.vandalist.service;
 
+import nl.vandalist.model.GenreDto;
 import nl.vandalist.model.LanguageDto;
 import nl.vandalist.repository.LanguageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,5 +40,13 @@ public class LanguageService {
         }
         oldLanguageDto.setName(languageDto.getName());
         return languageRepository.save(oldLanguageDto);
+    }
+
+    public void deleteLanguage(final Long languageId) {
+        final LanguageDto toBeDeletedDto = this.getLanguageById(languageId);
+        if (toBeDeletedDto == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("The language with %s does not exist in the database", languageId));
+        }
+        languageRepository.delete(toBeDeletedDto);
     }
 }
