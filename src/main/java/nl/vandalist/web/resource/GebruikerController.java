@@ -39,10 +39,11 @@ public class GebruikerController {
         List<GebruikerDto> gebruikers = gebruikersService.getGebruikers();
 
         if (gebruikersnaam != null && !gebruikersnaam.isEmpty()) {
-            List<GebruikerDto> gebruikersVoornaam = new ArrayList<>(gebruikers = gebruikers.stream().filter(gebruikerDto -> gebruikerDto.getVoornaam().toLowerCase().contains(gebruikersnaam.toLowerCase())).toList());
-            List<GebruikerDto> achternaam = gebruikers.stream().filter(gebruikerDto -> gebruikerDto.getAchternaam().toLowerCase().contains(gebruikersnaam.toLowerCase())).toList();
-            gebruikersVoornaam.addAll(achternaam);
-            gebruikers = gebruikersVoornaam;
+            return ResponseEntity.ok(gebruikers
+                    .stream()
+                    .filter(gebruikerDto -> gebruikerDto.getVoornaam().toLowerCase().contains(gebruikersnaam.toLowerCase())
+                            || gebruikerDto.getAchternaam().toLowerCase().contains(gebruikersnaam.toLowerCase()))
+                    .toList());
         }
 
         return ResponseEntity.ok(gebruikers);

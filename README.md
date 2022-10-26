@@ -61,4 +61,13 @@ generen.
     1. Hierin staan de services die communiceren met de api.
     2. Elke service moet een `@service` tag boven in het bestand hebben (zie de voorbeelden)
     3. Dit alles gaat op basis van rest assured zie ook https://www.baeldung.com/rest-assured-tutorial
+5. repository folder
+    1. Mocht jij nou handmatig je database willen controleren dan kun je vanuit deze repository dat doen.
+    2. Voeg de repository toe:
 
+```java
+@Autowired
+AuthorRepository authorRepository;
+```
+
+Hiermee kun je dan de `authorRepository.` en dan wat je wil doen;
