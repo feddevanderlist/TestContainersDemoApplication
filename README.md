@@ -40,6 +40,8 @@ generen.
 2. model folder
     1. in deze folder staan de DTO's (Data Transfer Object) van elke benodigde database tabel.
     2. Deze verzend je naar de api en krijg je ook weer terug van de api.
+    3. Voor deze DTO's is gebruik gemaakt van LOMBOK hierdoor worden de getters, setters, builders and constructors
+       automagisch gegeneerd.
 3. step folder
     1. In de step folder plaats je de code voor je feature files in een class met bij voorkeur dezelfde naam als je
        feature file.2
