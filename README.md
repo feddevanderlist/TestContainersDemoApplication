@@ -71,3 +71,10 @@ AuthorRepository authorRepository;
 ```
 
 Hiermee kun je dan de `authorRepository.` en dan wat je wil doen;
+
+
+## Als laatste als je niet weet waar je moet starten ##
+Als je nu de hele readme hebt gelezen en je niet weet waar je moet starten. <br>
+Kijk een in de feature folder `/src/it/resources/features` en maak een feature file voor author, language of genre <br>
+Vervolgens kun je de step gaan maken of de service die keuze is aan jou. <br>
+Veel succes :D
