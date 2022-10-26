@@ -7,6 +7,16 @@ The project will be used for teaching others how to work with test containers.
 
 # Dutch information #
 
+# Het doel #
+
+Het doel is om een test line coverage van 85% te krijgen.
+Het bestand [CoverageProfile.run.xml](CoverageProfile.run.xml) kun je importeren in je profile links bovenin in intellij
+En dan de testen aftrappen met de run with coverage optie. Dit is een play button met een schild.
+Dan verschijnt er op rechts een resultaat en moet de all folder 85% line coverage hebben.
+[foto voor coverage en de knop](overzichtIntellijSchermen.png)
+
+## Informatie over het project ##
+
 In dit project is het doel om alle api calls te testen. De volgende urls zijn aanwezig:
 
 - /authors (GET,POST,PATCH, DELETE) en ?authorName=
