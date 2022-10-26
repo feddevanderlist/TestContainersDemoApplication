@@ -6,7 +6,10 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.spring.CucumberContextConfiguration;
 import io.restassured.RestAssured;
+import io.restassured.config.LogConfig;
 import io.restassured.config.ObjectMapperConfig;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import nl.vandalist.it.config.TestConfig;
 import nl.vandalist.it.container.ContainerApplicationRunner;
 import org.slf4j.Logger;
@@ -44,6 +47,7 @@ public class CucumberSpringConfig {
         RestAssured.baseURI = "http://localhost:" + port;
         RestAssured.config = RestAssured.config().objectMapperConfig(
                 new ObjectMapperConfig().jackson2ObjectMapperFactory((clazz, charset) -> objectMapper));
+        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
