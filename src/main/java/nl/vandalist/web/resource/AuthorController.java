@@ -38,10 +38,13 @@ public class AuthorController {
     public ResponseEntity<List<AuthorDto>> getAllAuthors(@RequestParam(required = false, name = "authorName") final String authorName) {
         List<AuthorDto> authors = authorService.getAuthors();
         if (authorName != null && !authorName.isEmpty()) {
-            List<AuthorDto> authorFirst = new ArrayList<>(authors = authors.stream().filter(authorDto -> authorDto.getFirstName().toLowerCase().contains(authorName.toLowerCase())).toList());
-            List<AuthorDto> authorLast = authors.stream().filter(authorDto -> authorDto.getLastName().toLowerCase().contains(authorName.toLowerCase())).toList();
-            authorFirst.addAll(authorLast);
-            authors = authorFirst;
+            return ResponseEntity.ok(
+                    authors.stream()
+                            .filter(a ->
+                                    a.getFirstName().toLowerCase().contains(authorName.toLowerCase())
+                                            || a.getLastName().toLowerCase().contains(authorName.toLowerCase()))
+                            .toList()
+            );
         }
 
 
