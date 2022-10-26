@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface LanguageRepositoryTest extends CrudRepository<LanguageTestDto, Long> {
+public interface LanguageRepositoryTest extends CrudRepository<LanguageDto, Long> {
 
     List<LanguageDto> findLanguagesByNameContainingIgnoreCase(@NonNull String name);
 }
