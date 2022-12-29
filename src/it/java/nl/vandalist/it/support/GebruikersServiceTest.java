@@ -26,7 +26,7 @@ public class GebruikersServiceTest {
         return RestAssured.given()
                 .contentType("application/json")
                 .body(gebruiker)
-                .post("gebruikers/")
+                .post("gebruikers")
                 .andReturn();
     }
 

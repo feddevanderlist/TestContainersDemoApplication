@@ -6,10 +6,10 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.spring.CucumberContextConfiguration;
 import io.restassured.RestAssured;
-import io.restassured.config.LogConfig;
 import io.restassured.config.ObjectMapperConfig;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
+import jakarta.annotation.PostConstruct;
 import nl.vandalist.it.config.TestConfig;
 import nl.vandalist.it.container.ContainerApplicationRunner;
 import org.slf4j.Logger;
@@ -19,7 +19,6 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 
-import javax.annotation.PostConstruct;
 
 /**
  * De {@link CucumberSpringConfig} zorgt ervoor dat we onze Spring Boot applicatie opstarten zodra we de Cucumber tests

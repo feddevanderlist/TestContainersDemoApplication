@@ -26,7 +26,7 @@ public class AuthorServiceTest {
         return RestAssured.given()
                 .contentType("application/json")
                 .body(Author)
-                .post("authors/")
+                .post("authors")
                 .andReturn();
     }
 
