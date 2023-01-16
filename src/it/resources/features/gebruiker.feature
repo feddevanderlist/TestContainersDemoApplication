@@ -26,10 +26,10 @@ Functionaliteit: Werken met gebruiker
   Scenario: update een gebruiker
     Als de gebruiker een gebruiker update
       | id | voornaam | achternaam | leeftijd | titel  | is_admin |
-      | 2  | John     | Wick       | 26       | Tester | true     |
+      | 1  | John     | Wick       | 26       | Tester | true     |
     Dan heeft hij een gebruiker met de volgende gegevens
       | id | voornaam | achternaam | leeftijd | titel  | is_admin |
-      | 2  | John     | Wick       | 26       | Tester | true     |
+      | 21 | John     | Wick       | 26       | Tester | true     |
 
   Scenario: create een gebruiker met hetzelfde id
     Als de gebruiker een nieuwe gebruiker aanmaakt met de volgende gegevens
