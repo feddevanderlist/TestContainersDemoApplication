@@ -65,7 +65,7 @@ public class GenreController {
     }
 
     @PatchMapping(
-            value = "",
+            value = "/{genreId}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )

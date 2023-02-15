@@ -65,7 +65,7 @@ public class CountryController {
     }
 
     @PatchMapping(
-            value = "",
+            value = "/{countryId}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )

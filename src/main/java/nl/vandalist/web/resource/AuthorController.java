@@ -79,7 +79,7 @@ public class AuthorController {
     }
 
     @PatchMapping(
-            value = "",
+            value = "/{authorId}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
