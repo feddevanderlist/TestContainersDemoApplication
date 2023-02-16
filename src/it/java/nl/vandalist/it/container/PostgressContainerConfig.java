@@ -23,7 +23,7 @@ public class PostgressContainerConfig implements Container {
                     .withUsername("testuser")
                     .withPassword("testpassword")
                     .withInitScript("postgress/insert.sql")
-                    .withEnv("MAX_HEAP_SIZE", "256m");
+                    .withEnv("MAX_HEAP_SIZE", "256m").withReuse(true);
 
     private static final String POSTGRESS_SCRIPT_LOCATION = "postgress/scripts/";
 
@@ -49,8 +49,8 @@ public class PostgressContainerConfig implements Container {
     }
 
     public static void insertIntoDatabase(String filename) {
-            JdbcDatabaseDelegate containerDelegate = new JdbcDatabaseDelegate(postgress, "");
-            ScriptUtils.runInitScript(containerDelegate, POSTGRESS_SCRIPT_LOCATION + filename + ".sql");
+        JdbcDatabaseDelegate containerDelegate = new JdbcDatabaseDelegate(postgress, "");
+        ScriptUtils.runInitScript(containerDelegate, POSTGRESS_SCRIPT_LOCATION + filename + ".sql");
 
     }
 
