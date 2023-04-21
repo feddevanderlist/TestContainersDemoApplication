@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.2</version>
+        <version>3.0.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -17,10 +17,10 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <logback_version>1.4.5</logback_version>
-        <cucumber.version>7.11.1</cucumber.version>
-        <testcontainers.version>1.17.6</testcontainers.version>
-        <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
+        <logback_version>1.4.7</logback_version>
+        <cucumber.version>7.11.2</cucumber.version>
+        <testcontainers.version>1.18.0</testcontainers.version>
+        <org.mapstruct.version>1.5.4.Final</org.mapstruct.version>
     </properties>
 
     <dependencies>
@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.5.3</version>
+            <version>42.6.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -65,11 +65,19 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback_version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>8.0.0.Final</version>
+        </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
