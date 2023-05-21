@@ -35,7 +35,7 @@ public class PostgressContainerConfig implements Container {
 
     @Override
     public void stop() {
-        postgress.close();
+        postgress.stop();
         //do nothing, JVM handles shut down
     }
 

@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.testcontainers.lifecycle.Startables;
 
 import java.util.List;
 
@@ -16,8 +17,9 @@ public class ContainerApplicationRunner implements ApplicationContextInitializer
 
     @Override
     public void initialize(@NotNull ConfigurableApplicationContext applicationContext) {
-        containers.forEach(Container::start);
-        containers.forEach(container -> addPropertiesToContext(container, applicationContext));
+        Startables.deepStart(containers).join();
+
+        containers.parallelStream().forEach(container -> addPropertiesToContext(container, applicationContext));
     }
 
     private void addPropertiesToContext(Container container, ConfigurableApplicationContext applicationContext) {

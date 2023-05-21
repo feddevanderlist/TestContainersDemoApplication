@@ -3,16 +3,17 @@ package nl.vandalist.model;
 import lombok.*;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
-@Builder
 @Entity
 @Table(name = "author")
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
+@RequiredArgsConstructor
 @AllArgsConstructor
 public class AuthorDto {
     @Id
