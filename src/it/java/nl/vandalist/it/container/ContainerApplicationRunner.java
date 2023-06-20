@@ -18,6 +18,7 @@ public class ContainerApplicationRunner implements ApplicationContextInitializer
     @Override
     public void initialize(@NotNull ConfigurableApplicationContext applicationContext) {
         Startables.deepStart(containers).join();
+
         containers.parallelStream().forEach(container -> addPropertiesToContext(container, applicationContext));
     }
 

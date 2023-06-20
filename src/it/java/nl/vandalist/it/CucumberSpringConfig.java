@@ -28,6 +28,7 @@ import org.springframework.test.context.ContextConfiguration;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(initializers = ContainerApplicationRunner.class, classes = TestConfig.class)
 @DirtiesContext // Deze annotatie zorgt ervoor dat de database wordt geschoond tussen ieder scenario
+
 public class CucumberSpringConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(CucumberSpringConfig.class);
 

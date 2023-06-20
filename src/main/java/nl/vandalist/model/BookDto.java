@@ -3,16 +3,17 @@ package nl.vandalist.model;
 import lombok.*;
 
 import jakarta.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
-@Builder
 @Table(name = "book")
 @Entity
-@NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor(force = true)
 public class BookDto {
 
     @Id

@@ -13,6 +13,7 @@ import java.util.stream.StreamSupport;
 @Service
 public class GebruikersService {
 
+
     @Autowired
     private GebruikerRepository gebruikerRepository;
 
