@@ -1,5 +1,7 @@
 package nl.vandalist.it.container;
 
+import org.testcontainers.lifecycle.Startable;
+
 import java.util.Collections;
 import java.util.Map;
 
@@ -7,7 +9,7 @@ import java.util.Map;
  * Simpele interface, zodat je uniform - op een Spring manier - TestContainers kunt starten.
  * Zie {@link ContainerApplicationRunner} en {@link PostgresContainer}.
  */
-public interface Container {
+public interface Container extends Startable {
 
     /**
      * Dit is een blocking methode die een docker container start, en wacht tot die volledig opgestart is.

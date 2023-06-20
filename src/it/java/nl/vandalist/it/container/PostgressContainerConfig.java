@@ -23,7 +23,8 @@ public class PostgressContainerConfig implements Container {
                     .withUsername("testuser")
                     .withPassword("testpassword")
                     .withInitScript("postgress/insert.sql")
-                    .withEnv("MAX_HEAP_SIZE", "256m").withReuse(true);
+                    .withEnv("MAX_HEAP_SIZE", "256m")
+                    .withReuse(true);
 
     private static final String POSTGRESS_SCRIPT_LOCATION = "postgress/scripts/";
 
