@@ -27,7 +27,7 @@ import org.springframework.test.context.ContextConfiguration;
 @CucumberContextConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(initializers = ContainerApplicationRunner.class, classes = TestConfig.class)
-@DirtiesContext // Deze annotatie zorgt ervoor dat de database wordt geschoond tussen ieder scenario
+//@DirtiesContext // Deze annotatie zorgt ervoor dat de database wordt geschoond tussen ieder scenario
 
 public class CucumberSpringConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(CucumberSpringConfig.class);
@@ -47,7 +47,7 @@ public class CucumberSpringConfig {
         RestAssured.baseURI = "http://localhost:" + port;
         RestAssured.config = RestAssured.config().objectMapperConfig(
                 new ObjectMapperConfig().jackson2ObjectMapperFactory((clazz, charset) -> objectMapper));
-        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
+//        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
@@ -56,7 +56,7 @@ public class CucumberSpringConfig {
      *
      * @param scenario het huidige scenario (wordt geïnjecteerd door Cucumber)
      */
-    @Before
+
     public void printScenario(final Scenario scenario) {
         LOGGER.info("----------------------------------------------------------------");
         LOGGER.info(scenario.getName());

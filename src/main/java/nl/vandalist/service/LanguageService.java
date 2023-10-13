@@ -1,6 +1,5 @@
 package nl.vandalist.service;
 
-import nl.vandalist.model.GenreDto;
 import nl.vandalist.model.LanguageDto;
 import nl.vandalist.repository.LanguageRepository;
 import org.springframework.beans.factory.annotation.Autowired;

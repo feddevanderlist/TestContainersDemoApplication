@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.testcontainers.lifecycle.Startables;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,13 +14,26 @@ import java.util.List;
  * Je definieert containers als class in de containers package, en dan verwijs je daarnaar vanuit deze class.
  */
 public class ContainerApplicationRunner implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-    private final List<Container> containers = List.of(new PostgressContainerConfig());
+    private final List<Container> containers = new ArrayList<>();
+
+    public ContainerApplicationRunner() {
+        containers.add(new PostgressContainerConfig());
+        for (int i = 0; i < 10; i++) {
+            containers.add(new ImmuDbContainer(i + 100));
+        }
+    }
 
     @Override
     public void initialize(@NotNull ConfigurableApplicationContext applicationContext) {
+        System.out.println(containers.size());
+        long startTime = System.currentTimeMillis();
         Startables.deepStart(containers).join();
-
+//        containers.forEach(Container::start);
         containers.parallelStream().forEach(container -> addPropertiesToContext(container, applicationContext));
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+
+        System.out.println("Execution time: " + elapsedTime + " milliseconds");
     }
 
     private void addPropertiesToContext(Container container, ConfigurableApplicationContext applicationContext) {

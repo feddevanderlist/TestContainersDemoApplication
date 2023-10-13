@@ -10,9 +10,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,13 +26,17 @@ public class PostgressContainerConfig implements Container {
                     .withUsername("testuser")
                     .withPassword("testpassword")
                     .withInitScript("postgress/insert.sql")
-                    .withEnv("MAX_HEAP_SIZE", "256m").withReuse(true);
+                    .withEnv("MAX_HEAP_SIZE", "256m")
+                    .withReuse(false);
 
     private static final String POSTGRESS_SCRIPT_LOCATION = "postgress/scripts/";
 
     @Override
     public void start() {
+
+        System.out.printf("Starting %s: %s%n", this.getClass().getSimpleName(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
         postgress.start();
+        System.out.printf("Running %s: %s%n", this.getClass().getSimpleName(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
     }
 
 
@@ -59,6 +66,7 @@ public class PostgressContainerConfig implements Container {
         final String scriptLocation2 = new File(scriptLocation).getAbsolutePath();
         try (Stream<Path> stream = Files.walk(Paths.get(scriptLocation2), 1)) {
             return stream
+                    .parallel()
                     .filter(file -> !Files.isDirectory(file))
                     .map(Path::getFileName)
                     .map(Path::toString)

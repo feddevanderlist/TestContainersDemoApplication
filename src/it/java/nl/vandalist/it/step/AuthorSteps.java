@@ -40,14 +40,14 @@ public class AuthorSteps {
     @Dan("heeft hij {int} author")
     public void heeftHijAuthor(final int aantalAuthors) {
         final Response response = state.getResponse();
-        Assertions.assertEquals(200, response.getStatusCode(), response.getBody().prettyPrint());
+        Assertions.assertEquals(200, response.getStatusCode(), response.getBody().asPrettyString());
         Assertions.assertEquals(aantalAuthors, response.getBody().jsonPath().getList("", AuthorTestDto.class).size());
     }
 
     @Dan("heeft hij een author met de volgende gegevens")
     public void heeftHijEenAuthorMetDeVolgendeGegevens(final List<Map<String, String>> expectedAuthorString) {
         final Response response = state.getResponse();
-        Assertions.assertEquals(200, response.getStatusCode(), response.getBody().prettyPrint());
+        Assertions.assertEquals(200, response.getStatusCode(), response.getBody().asPrettyString());
         final AuthorTestDto author = response.getBody().as(AuthorTestDto.class);
         final AuthorTestDto expectedAuthor = authorMapper.converteerCucumberMapToAuthorTestDto(expectedAuthorString.get(0));
         Assertions.assertAll(
