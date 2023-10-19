@@ -31,7 +31,9 @@ public class GebruikersService {
     }
 
     public GebruikerDto updateGebruiker(final Long gebruikerId, final GebruikerDto updatedGebruikerDto) {
-        final GebruikerDto gebruiker = gebruikerRepository.findById(gebruikerId).orElse(null);
+        final GebruikerDto gebruiker = gebruikerRepository
+                .findById(gebruikerId)
+                .orElse(null);
         if (gebruiker == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Gebruiker bestaat niet");
@@ -40,6 +42,7 @@ public class GebruikersService {
         updatedGebruikerDto.setId(gebruiker.getId());
         return gebruikerRepository.save(updatedGebruikerDto);
     }
+
     public void deleteGebruiker(final Long gebruikerId) {
         final GebruikerDto toBeDeletedDto = this.getGebruikerById(gebruikerId);
         if (toBeDeletedDto == null) {
