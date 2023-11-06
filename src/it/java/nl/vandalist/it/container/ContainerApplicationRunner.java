@@ -16,19 +16,11 @@ import java.util.List;
 public class ContainerApplicationRunner implements ApplicationContextInitializer<ConfigurableApplicationContext> {
     private final List<Container> containers = new ArrayList<>();
 
-    public ContainerApplicationRunner() {
-        containers.add(new PostgressContainerConfig());
-        for (int i = 0; i < 10; i++) {
-            containers.add(new ImmuDbContainer(i + 100));
-        }
-    }
-
     @Override
     public void initialize(@NotNull ConfigurableApplicationContext applicationContext) {
         System.out.println(containers.size());
         long startTime = System.currentTimeMillis();
         Startables.deepStart(containers).join();
-//        containers.forEach(Container::start);
         containers.parallelStream().forEach(container -> addPropertiesToContext(container, applicationContext));
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;

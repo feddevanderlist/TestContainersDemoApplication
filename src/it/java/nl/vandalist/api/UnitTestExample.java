@@ -1,5 +1,6 @@
 package nl.vandalist.api;
 
+import io.restassured.RestAssured;
 import jakarta.transaction.Transactional;
 import nl.vandalist.model.CountryDto;
 import nl.vandalist.service.CountryService;

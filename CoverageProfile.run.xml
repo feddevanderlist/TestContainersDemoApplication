@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="CoverageProfile" type="JUnit" factoryName="JUnit">
-    <module name="TestContainersDemoApplication" />
+    <module name="TestContainersDemo" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="nl.vandalist.it.*" />
